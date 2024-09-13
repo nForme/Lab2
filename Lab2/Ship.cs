@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Xml.Linq;
 
 namespace Lab2
 {
@@ -45,14 +47,40 @@ namespace Lab2
             set { _draft = value; }
         }
 
-        public void Sail()
+        public void Move(float speed)
         {
-            Console.WriteLine($"{Name} is sailing.");
+            Console.WriteLine($"{Name} is moving at {speed} knots.");
         }
 
-        public void Anchor()
+        public void Repair()
         {
-            Console.WriteLine($"{Name} is anchoring.");
+            Console.WriteLine($"{Name} is being repaired.");
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Ship ship = (Ship)obj;
+            return Name == ship.Name && Length == ship.Length && Width == ship.Width && Draft == ship.Draft;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Length, Width, Draft);
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Length: {Length}, Width: {Width}, Draft: {Draft}";
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
+
+

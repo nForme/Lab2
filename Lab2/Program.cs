@@ -4,36 +4,35 @@ class Program
 {
     static void Main(string[] args)
     {
-        //Создание экземпляров классов
-        Ship ship1 = new Ship("Titanic", 10000, 1000, 500);
-        Steamship steamship1 = new Steamship("North Star", 8000, 600, 300, 2000);
-        Sailboat sailboat1 = new Sailboat("Mystery", 5000, 300, 150, 100);
-        Corvette corvette1 = new Corvette("Defender", 7000, 500, 250, "Guns and torpedoes");
+        // a) Разработать основные методы классов, иллюстрирующие работу с объектами этих классов.
+        Ship ship = new Ship("Normandie", 300f, 50f, 10f);
+        ship.Move(10f);
+        ship.Repair();
 
-        // Вызов методов классов
-        Console.WriteLine("Методы классов:");
-        ship1.Sail();
-        steamship1.Sail();
-        sailboat1.Sail();
-        corvette1.Sail();
+        Steamship steamship = new Steamship("MS Queen Mary 2", 200f, 70f, 12f, 10000);
+        steamship.StartEngine();
+        steamship.StopEngine();
 
-        ship1.Anchor();
-        steamship1.Anchor();
-        sailboat1.Anchor();
-        corvette1.Anchor();
+        Sailboat sailboat = new Sailboat("Cutty Sark", 60f, 15f, 3f, 100f);
+        sailboat.SetSail();
+        sailboat.LowerSail();
 
-        Console.WriteLine("Логика для кораблей:");
-        // Добавление логики и поведения для каждого типа корабlea
-        steamship1.StartEngine();
-        sailboat1.HoistSail();
-        corvette1.Fire();
+        Corvette corvette = new Corvette("USS Lassen", 100f, 30f, 5f, "Missile Launcher");
+        corvette.LaunchMissile();
 
-        Console.WriteLine("Управление состоянием кораблей:");
-        // Реализация обработки событий или логики для управления состоянием корабlea
-        ship1.Sail();
-        steamship1.StopEngine();
-        sailboat1.LowerSail();
-        corvette1.Defend();
+        // b) Переопределить методы, унаследованные из класса Object
+        Ship shipClone = (Ship)ship.Clone();
+        Console.WriteLine(shipClone.ToString());
+
+        // c) protected Object clone()
+        // d) public boolean equals(Object obj)
+        // e) public int hashCode()
+        // f) public String toString()
+        Console.WriteLine(ship.Equals(shipClone));
+        Console.WriteLine(ship.GetHashCode());
+        Console.WriteLine(ship.ToString());
+
+        Console.ReadLine();
     }
 }
     

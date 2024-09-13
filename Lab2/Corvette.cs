@@ -22,14 +22,38 @@ namespace Lab2
             set { _armament = value; }
         }
 
-        public void Fire()
+        public void LaunchMissile()
         {
-            Console.WriteLine($"{Name} is firing its armament.");
+            Console.WriteLine($"{Name} is launching a missile.");
         }
 
-        public void Defend()
+        public override bool Equals(object obj)
         {
-            Console.WriteLine($"{Name} is defending itself.");
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            if (!base.Equals(obj))
+                return false;
+
+            Corvette corvette = (Corvette)obj;
+            return Armament == corvette.Armament;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), Armament);
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Length: {Length}, Width: {Width}, Draft: {Draft}, Armament: {Armament}";
+        }
+
+        public new object Clone()
+        {
+            Corvette clone = (Corvette)base.Clone();
+            clone._armament = this._armament;
+            return clone;
         }
     }
 }

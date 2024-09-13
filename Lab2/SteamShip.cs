@@ -31,5 +31,34 @@ namespace Lab2
         {
             Console.WriteLine($"{Name} is stopping its engine.");
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            if (!base.Equals(obj))
+                return false;
+
+            Steamship steamship = (Steamship)obj;
+            return EnginePower == steamship.EnginePower;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(base.GetHashCode(), EnginePower);
+        }
+
+        public override string ToString()
+        {
+            return $"Name: {Name}, Length: {Length}, Width: {Width}, Draft: {Draft}, Engine Power: {EnginePower}";
+        }
+
+        public new object Clone()
+        {
+            Steamship clone = (Steamship)base.Clone();
+            clone._enginePower = this._enginePower;
+            return clone;
+        }
     }
 }
