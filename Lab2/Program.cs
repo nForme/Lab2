@@ -32,6 +32,20 @@ class Program
         Console.WriteLine(ship.GetHashCode());
         Console.WriteLine(ship.ToString());
 
+        Ship[] ships = new Ship[]
+{
+                new Steamship("MS Queen Mary 2", 200f, 70f, 12f, 10000),
+                new Sailboat("Cutty Sark", 60f, 15f, 3f, 100f),
+                new Corvette("USS Lassen", 100f, 30f, 5f, "Missile Launcher")
+};
+
+        // Использование полиморфизма для вызова методов
+        foreach (Ship obj in ships)
+        {
+            ship.Move(10f);
+            ship.Repair();
+        }
+
         Console.ReadLine();
     }
 }
